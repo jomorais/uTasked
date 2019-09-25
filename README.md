@@ -1,2 +1,2 @@
 # uTasked
-A Non-Preemptive Timed Task Scheduler for microcontroller
+A Non-Preemptive Timed Task Scheduler for Microcontrollers
