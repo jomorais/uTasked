@@ -1,0 +1,11 @@
+config SHOW_ONLY_CURRENT_USER
+    bool "show data only for current user"
+    default y
+    help
+      script will get data only for currewnt user
+
+config HELLO_WORLD_MESSAGE
+    string "Hello World Message"
+    default "Hello World"
+    help
+        Change the 'Hello World' message
