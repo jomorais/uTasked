@@ -3,6 +3,7 @@
         "malloc.h": "c",
         "typeinfo": "c",
         "port.h": "c",
-        "unity.h": "c"
+        "unity.h": "c",
+        "stdint.h": "c"
     }
 }

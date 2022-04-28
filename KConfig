@@ -3,3 +3,10 @@ config KERNEL_BANNER_MESSAGE
     default "+/ uTasked -  \+"
     help
         Change the kernel banner message
+
+
+config KERNEL_ENABLE_SCHEDULER
+    bool "ENABLE_SCHEDULER"
+    default 1
+    help
+        Change the kernel banner message

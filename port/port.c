@@ -1,6 +1,6 @@
 #include "port.h"
 
-struct port_t *port;
+static struct port_t port;
 
 uint32_t port_millis()
 {
@@ -9,13 +9,28 @@ uint32_t port_millis()
     return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000L);
 }
 
-struct port_t *Port()
+
+void * port_malloc(size_t size)
 {
-    if (port == NULL)
+    return malloc(size);
+}
+
+
+void port_free(void * pointer)
+{
+    free(pointer);
+}
+
+
+struct port_t *Port(malloc_t malloc, free_t free)
+{
+    if (port.malloc == NULL && port.free == NULL)
     {
-        port = (struct port_t *)malloc(sizeof(struct port_t));
-        *port = (struct port_t){
-            .millis = &port_millis};
+        port = (struct port_t){
+            .millis = &port_millis,
+            .malloc = malloc ? malloc : &port_malloc,
+            .free = free ? free : &port_free
+        };
     }
-    return port;
+    return &port;
 }

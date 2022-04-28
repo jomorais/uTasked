@@ -3,7 +3,7 @@ ROOT_DIR = $(PWD)
 KERNEL_DIR = $(PWD)/kernel
 PORT_DIR = $(PWD)/port
 TEST_DIR = $(PWD)/test
-CFLAGS = -target arm64-apple-darwin21.4.0
+CFLAGS = 
 
 INCLUDES += -I $(ROOT_DIR)
 INCLUDES += -I $(KERNEL_DIR)

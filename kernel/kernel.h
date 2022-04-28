@@ -1,3 +1,6 @@
+#ifndef KERNEL_H
+#define KERNEL_H
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -71,3 +74,5 @@ struct kernel_t
 };
 
 struct kernel_t *Kernel(struct port_t *port);
+
+#endif

@@ -1,1 +1,2 @@
-#define CONFIG_KERNEL_BANNER_MESSAGE "----< uTasked >----"
+#define CONFIG_KERNEL_BANNER_MESSAGE "o---( uTasked )---o"
+#define CONFIG_KERNEL_ENABLE_SCHEDULER 1
