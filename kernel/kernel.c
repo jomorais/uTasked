@@ -247,7 +247,7 @@ static void kernel_scheduler(void)
 struct kernel_t *Kernel(struct port_t *port)
 {
     kernel_data.port = port;
-    if (kernel_data.port != NULL)
+    if (kernel_data.port == NULL)
         kernel_data.port = Port();
 
     if (kernel == NULL)

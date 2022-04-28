@@ -17,16 +17,16 @@ include .config
 
 
 all: .config port.o kernel.o test.o
-	$(CC) $(CFLAGS) -o test.elf $(PORT_DIR)/port.o $(KERNEL_DIR)/kernel.o $(TEST_DIR)/test.o
+	$(CC)  -o test.elf $(PORT_DIR)/port.o $(KERNEL_DIR)/kernel.o $(TEST_DIR)/test.o
 
 port.o: $(PORT_DIR)/port.c
-	$(CC) $(CFLAGS) -c $(PORT_DIR)/port.c -o $(PORT_DIR)/port.o $(INCLUDES)
+	$(CC)  -c $(PORT_DIR)/port.c -o $(PORT_DIR)/port.o $(INCLUDES)
 
 kernel.o: $(KERNEL_DIR)/kernel.c $(KERNEL_DIR)/kernel.h $(ROOT_DIR)/config.h $(PORT_DIR)/port.h
-	$(CC) $(CFLAGS) -c $(KERNEL_DIR)/kernel.c -o $(KERNEL_DIR)/kernel.o $(INCLUDES)
+	$(CC)  -c $(KERNEL_DIR)/kernel.c -o $(KERNEL_DIR)/kernel.o $(INCLUDES)
 
 test.o: $(TEST_DIR)/test.c $(KERNEL_DIR)/*
-	$(CC) $(CFLAGS) -c $(TEST_DIR)/test.c -o $(TEST_DIR)/test.o $(INCLUDES)
+	$(CC)  -c $(TEST_DIR)/test.c -o $(TEST_DIR)/test.o $(INCLUDES)
 
 unity_tests.o: $(TEST_DIR)/unity_tests.c $(KERNEL_DIR)/*
 	$(CC) $(CFLAGS) -c $(TEST_DIR)/unity_tests.c -o $(TEST_DIR)/unity_tests.o $(INCLUDES)

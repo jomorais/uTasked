@@ -42,5 +42,3 @@ int main(void)
     kernel->scheduler();
     return 0;
 }
-
-// todo: messageQueue(struct kernel_t *kernel);
