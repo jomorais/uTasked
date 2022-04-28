@@ -57,6 +57,7 @@ struct k_task_t
 struct kernel_data_t
 {
     struct k_task_t *task_list;
+    struct port_t *port;
 };
 
 struct kernel_t
@@ -69,4 +70,4 @@ struct kernel_t
     k_scheduler_t scheduler;
 };
 
-struct kernel_t *Kernel();
+struct kernel_t *Kernel(struct port_t *port);

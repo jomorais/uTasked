@@ -1,5 +1,4 @@
 #include "kernel.h"
-#include "unity.h"
 
 int8_t task_1(void *kernel, void *payload)
 {
@@ -30,7 +29,7 @@ int8_t task_4(void *kernel, void *payload)
 
 int main(void)
 {
-    struct kernel_t *kernel = Kernel();
+    struct kernel_t *kernel = Kernel(NULL);
     if (kernel->create_task(task_1, "task_1", 100, 5, TASK_WAITING, 0) != SUCCESS)
         printf("kernel->create_task:: error\n");
     if (kernel->create_task(task_2, "task_2", 1000, 0, TASK_WAITING, 0) != SUCCESS)

@@ -3,6 +3,16 @@
 static struct kernel_data_t kernel_data;
 static struct kernel_t *kernel;
 
+struct k_task_t *__kernel_get_task_list()
+{
+    return kernel_data.task_list;
+}
+
+struct port_t *__kernel_port_service()
+{
+    return kernel_data.port;
+}
+
 static int8_t __kernel_init(void)
 {
     kernel_data.task_list = NULL;
@@ -33,7 +43,8 @@ static int8_t __kernel_is_task_pending(struct k_task_t *task)
 
 static int8_t __kernel_task_check_execution_time_overflow(struct k_task_t *task)
 {
-    if ((millis() - task->last_millis) >= task->execution_interval_ms)
+    struct port_t *port_service = __kernel_port_service();
+    if ((port_service->millis() - task->last_millis) >= task->execution_interval_ms)
     {
         task->state = TASK_PENDING;
         return true;
@@ -79,13 +90,14 @@ static struct k_task_t *__kernel_allocate_new_task(k_routine_t task,
     struct k_task_t *new_task = (struct k_task_t *)malloc(sizeof(struct k_task_t));
     if (new_task == NULL)
         return NULL;
+    struct port_t *port_service = __kernel_port_service();
     *new_task = (struct k_task_t){
         .name = name,
         .routine = task,
         .execution_interval_ms = execution_interval_ms,
         .execution_quantity = execution_quantity,
         .state = initial_state,
-        .last_millis = millis(),
+        .last_millis = port_service->millis(),
         .execution_type = execution_quantity ? TASK_FINITE_EXEC : TASK_CONTINUOS_EXEC,
         .next = NULL};
     return new_task;
@@ -194,8 +206,9 @@ static int8_t __kernel_task_callback_routine(struct k_task_t *task)
 {
     if (task->state == TASK_PENDING)
     {
+        struct port_t *port_service = __kernel_port_service();
         task->routine(kernel, &task->payload);
-        task->last_millis = millis();
+        task->last_millis = port_service->millis();
         task->state = TASK_WAITING;
 
         if (task->execution_type != TASK_FINITE_EXEC)
@@ -231,8 +244,12 @@ static void kernel_scheduler(void)
     }
 }
 
-struct kernel_t *Kernel()
+struct kernel_t *Kernel(struct port_t *port)
 {
+    kernel_data.port = port;
+    if (kernel_data.port != NULL)
+        kernel_data.port = Port();
+
     if (kernel == NULL)
     {
         kernel = (struct kernel_t *)malloc(sizeof(struct kernel_t));

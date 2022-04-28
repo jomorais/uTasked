@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "malloc.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "port.h": "c",
+        "unity.h": "c"
     }
 }
