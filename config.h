@@ -1,1 +1,1 @@
-#define CONFIG_HELLO_WORLD_MESSAGE "Hello World OK"
+#define CONFIG_KERNEL_BANNER_MESSAGE "----< uTasked >----"

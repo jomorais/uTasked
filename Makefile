@@ -10,9 +10,12 @@ INCLUDES += -I $(PORT_DIR)
 INCLUDES += -I $(TEST_DIR)
 
 
-include .config
 
-all: port.o kernel.o test.o
+include .config
+ 
+
+
+all: .config port.o kernel.o test.o
 	$(CC) -o test.elf $(PORT_DIR)/port.o $(KERNEL_DIR)/kernel.o $(TEST_DIR)/test.o
 
 port.o: $(PORT_DIR)/port.c
@@ -23,6 +26,11 @@ kernel.o: $(KERNEL_DIR)/kernel.c $(KERNEL_DIR)/kernel.h $(ROOT_DIR)/config.h $(P
 
 test.o: $(TEST_DIR)/test.c $(KERNEL_DIR)/*
 	$(CC) -c $(TEST_DIR)/test.c -o $(TEST_DIR)/test.o $(INCLUDES)
+
+.config:
+	@echo "THIS PROJECT IS NOT YET CONFIGURED"
+	@echo "TO CREATE THE CONFIG.h FILE, TYPES: make menuconfig"
+
 
 menuconfig:
 	kconfig-mconf $(ROOT_DIR)/KConfig
